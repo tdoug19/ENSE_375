@@ -301,3 +301,24 @@ void main() {
 
 ```
 </details>
+
+We have numerous text fields to verify also:
+
+<details>
+
+<summary>expand bmi_test.dart</summary>
+
+in `bmi_test.dart`
+
+```dart
+    testWidgets('BMI page should height text', (tester) async {
+      await tester.pumpWidget(const MaterialApp(home: BMI()));
+
+      final titleFinder = find.text('height in cm');
+
+      expect(titleFinder, findsOneWidget);
+    });
+```
+</details>
+
+The same method can be used to find all our **TextField** text.
