@@ -18,9 +18,7 @@ In this lab you will be introduced to Unit and Widget testing.
 ## Procedure
 For the pre-lab, we are going to recreate the BMI Calculator but this time we are going to include automation testing.
 
-![bmi mockup](res/bmi-mockup.png)
-
-Let's start by setting up the project:
+Let's start by setting up the project again:
 
 Paste this as your new main file...
 
@@ -41,7 +39,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: BMI(),
     );
   }
 }
@@ -73,7 +70,37 @@ class BMI {
 
 }
 ```
-
 </details>
 
+## Unit Tests
+A unit test tests a single function, method, or class. The goal of a unit test is to verify the correctness of a unit of logic under a variety of conditions. External dependencies of the unit under test are generally mocked out. Unit tests generally don't read from or write to disk, render to screen, or receive user actions from outside the process running the test. 
 
+All the test files in a Flutter app, except for integration tests, are placed in the test directory.
+
+### Create a new test file
+First, you'll test the calculateBMI() method in the BMI class to verify that your bmi calculation is correct.  By convention, the directory structure in the test directory mimics that in the lib directory and the Dart files have the same name with _test appended.
+
+
+Create a bmi_test.dart file.
+
+<details>
+
+<summary>expand bmi_test.dart</summary>
+
+```dart
+
+import 'package:bmi_in_class/bmi.dart';
+import 'package:flutter_test/flutter_test.dart';
+
+void main() {
+  group('Testing BMI', () {
+    var bmi = BMI();
+
+    test('Testing the BMI calculation', () {
+      double bmiCalc = bmi.calculateBMI(175, 90);
+      expect('29.39', bmiCalc.toStringAsFixed(2));
+    });
+  });
+}
+```
+</details>
