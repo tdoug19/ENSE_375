@@ -104,3 +104,132 @@ void main() {
 }
 ```
 </details>
+
+In our application it is primarily Widgets, so we should learn some Widget testing.
+
+
+## Widget Tests
+Flutter widget tests are a type of test used to verify the visual appearance and behavior of individual Flutter widgets. These tests simulate user interactions and ensure that the widgets render correctly based on different states and inputs. Their primary purpose is to verify the correctness of Flutter widgets in terms of their appearance, layout, and interaction behaviors.
+
+###
+Tools and Libraries:
+
+**flutter_test** Package: This Flutter package provides utilities and classes necessary for writing and executing widget tests.
+
+**WidgetTester** Class: Central to widget testing, it allows for the creation of widget instances, interaction with widgets (such as tapping buttons or entering text), and inspecting widget properties during tests.
+
+###
+Common Use Cases
+
+**Stateful Widget Testing**: Verifying the correct initialization and updating of UI elements based on state changes within a stateful widget.
+
+**Interaction Testing**: Testing user interactions such as button taps, text input, scrolling behavior, etc., to ensure correct UI responses.
+
+**Layout Verification**: Checking that widgets render correctly according to specified layout constraints and responsive design principles.
+
+###
+Testing Methodology
+
+**Setup and Teardown**: Widget tests typically involve setting up the widget under test (pumpWidget), performing actions on it (tester.tap, tester.enterText, etc.), and then verifying expected outcomes (expect assertions).
+
+###
+Benefits of Widget Tests
+
+**Early Detection of UI Bugs**: Catching UI-related issues early in development reduces the likelihood of them reaching users.
+
+**Enhanced Code Confidence**: Ensures that widgets behave as expected across different states and interactions.
+
+**Facilitates Refactoring**: Allows developers to refactor UI code confidently, knowing that tests will detect regressions.
+
+**Supports Rapid Iteration**: Enables quick feedback on UI changes, aiding in iterative development and design refinement.
+
+
+Ok, we have to get our application to the point of last lab.  Copy the following code:
+
+<details>
+
+```dart 
+import 'package:flutter/material.dart';
+
+class BMI extends StatefulWidget {
+  const BMI({super.key});
+
+  @override
+  State<BMI> createState() => _BMIState();
+}
+
+class _BMIState extends State<BMI> {
+  final TextEditingController _heightController = TextEditingController();
+  final TextEditingController _weightController = TextEditingController();
+
+  double? _result;
+
+  var _bmiVal;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('BMI Calculator'),
+        centerTitle: true,
+      ),
+      body: Container(
+        padding: EdgeInsets.symmetric(horizontal: 10.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            TextField(
+              controller: _heightController,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                labelText: 'height in cm',
+              ),
+            ),
+            SizedBox(height: 50),
+            TextField(
+              controller: _weightController,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                labelText: 'weight in kg',
+              ),
+            ),
+            SizedBox(height: 50),
+            OutlinedButton(
+              onPressed: calculateBMI,
+              child: Text(
+                "Calculate",
+              ),
+            ),
+            SizedBox(height: 50),
+            Text('Result'),
+            Text(
+              _result == null
+                  ? "Enter Value"
+                  : "${_result!.toStringAsFixed(2)}",
+              style: TextStyle(
+                color: Colors.redAccent,
+                fontSize: 19.4,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void calculateBMI() {
+    double heightInCM = double.parse(_heightController.text);
+    double weightInKg = double.parse(_weightController.text);
+    double heightInM = heightInCM / 100;
+    double heightSquared = heightInM * heightInM;
+    _result = weightInKg / heightSquared;
+    setState(() {});
+  }
+}
+```
+</details>
+
+Now we are ready to test our widgets.  
+
+To locate widgets in a test environment, use the Finder classes. While it's possible to write your own **Finder** classes, it's generally more convenient to locate widgets using the tools provided by the **flutter_test** package.
