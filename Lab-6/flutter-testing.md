@@ -27,6 +27,7 @@ Paste this as your new main file...
 <summary>expand main.dart</summary>
 
 in `main.dart`
+
 ```dart
 import 'package:flutter/material.dart';
 import 'bmi.dart';
@@ -52,6 +53,8 @@ Create `lib/bmi.dart` and paste in the following:
 
 <details>
 <summary>expand bmi.dart</summary>
+
+in `bmi.dart`
 
 ```dart
 import 'package:flutter/material.dart';
@@ -86,6 +89,8 @@ Create a bmi_test.dart file.
 <details>
 
 <summary>expand bmi_test.dart</summary>
+
+in `bmi_test.dart`
 
 ```dart
 
@@ -147,6 +152,10 @@ Benefits of Widget Tests
 Ok, we have to get our application to the point of last lab.  Copy the following code:
 
 <details>
+
+<summary>expand bmi_test.dart</summary>
+
+in `bmi_test.dart`
 
 ```dart 
 import 'package:flutter/material.dart';
@@ -230,6 +239,65 @@ class _BMIState extends State<BMI> {
 ```
 </details>
 
+Don't forget to put the home: parameter back in main.dart either!
+
+<details>
+
+<summary>expand main.dart</summary>
+
+in `main.dart`
+
+```dart
+import 'package:flutter/material.dart';
+import 'bmi.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: BMI(),
+    );
+  }
+}
+```
+</details>
+
+
 Now we are ready to test our widgets.  
 
 To locate widgets in a test environment, use the Finder classes. While it's possible to write your own **Finder** classes, it's generally more convenient to locate widgets using the tools provided by the **flutter_test** package.
+
+
+Lets verify the title of our application.
+
+<details>
+
+<summary>expand bmi_test.dart</summary>
+
+in `bmi_test.dart`
+
+```dart 
+
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+
+import '../lib/bmi.dart';
+
+void main() {
+  group('Testing BMI', () {
+    testWidgets('BMI page should have a certain Title', (tester) async {
+      await tester.pumpWidget(MaterialApp(home: BMI()));
+
+      final titleFinder = find.text('BMI Calculator');
+
+      expect(titleFinder, findsOneWidget);
+    });
+  }
+}
+
+```
+</details>
