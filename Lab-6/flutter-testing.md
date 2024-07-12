@@ -385,3 +385,29 @@ in `bmi_test.dart`
 
 ```
 </details>
+
+## Assignment
+Just like in last lab, your requirements have changed and you must implement the Phase 1 and Phase 2 modifictions.  Now test your new Widgets with automated tests in your `bmi_test.dart`  file as per the previous lab requitements.
+
+## Submission
+
+Please submit your assignment to URCourses by the due date. Please include your `.dart` files and `.dart` test files, e.g. `main.dart`, `bmi.dart` and `bmi_test.dart`.
+
+## References
+
+Flutter:
+
+[Flutter Testing Code Lab](https://codelabs.developers.google.com/codelabs/flutter-app-testing#0)
+
+[CommonFinders class](https://api.flutter.dev/flutter/flutter_test/CommonFinders-class.html)
+
+[Testing Flutter apps](https://docs.flutter.dev/testing/overview)
+
+Dart:
+
+S. Ford, [The Dart Language: When Java and C# Aren't Sharp Enough](https://www.toptal.com/dart/dartlang-guide-for-csharp-java-devs), 2019
+
+BMI Tutorial:
+
+N. Singh, [Flutter BMI Calculator App](https://www.codementor.io/@nitishk72/flutter-bmi-calculator-app-1dlnjlhy6e), 2020
+
