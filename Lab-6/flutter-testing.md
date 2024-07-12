@@ -94,7 +94,7 @@ in `bmi_test.dart`
 
 ```dart
 
-import 'package:bmi_in_class/bmi.dart';
+import '../lib/bmi.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
