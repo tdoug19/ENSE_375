@@ -148,7 +148,7 @@ Benefits of Widget Tests
 
 **Supports Rapid Iteration**: Enables quick feedback on UI changes, aiding in iterative development and design refinement.
 
-
+### Build our applicaiton
 Ok, we have to get our application to the point of last lab.  Copy the following code:
 
 <details>
@@ -266,10 +266,15 @@ class MyApp extends StatelessWidget {
 ```
 </details>
 
-
+### Create our tests
 Now we are ready to test our widgets.  
 
 To locate widgets in a test environment, use the Finder classes. While it's possible to write your own **Finder** classes, it's generally more convenient to locate widgets using the tools provided by the **flutter_test** package.
+
+The widget testing framework provides finders to find widgets, for example 
+**text()**, **byType()**, and **byIcon()**. The framework also provides matchers to verify the results.
+
+[The api is found here](https://api.flutter.dev/flutter/flutter_test/CommonFinders-class.html)
 
 
 Lets verify the title of our application.
@@ -322,3 +327,61 @@ in `bmi_test.dart`
 </details>
 
 The same method can be used to find all our **TextField** text.
+
+### Simulate User Interaction
+
+Many widgets not only display information, but also respond to user interaction. This includes buttons that can be tapped, and **TextField** for entering text.
+
+To test these interactions, you need a way to simulate them in the test environment. For this purpose, use the WidgetTester library.
+
+The **WidgetTester** provides methods for entering text, tapping, and dragging.
+
+* **enterText()**
+* **tap()**
+* **drag()**
+
+In many cases, user interactions update the state of the app. In the test environment, Flutter doesn't automatically rebuild widgets when the state changes. To ensure that the widget tree is rebuilt after simulating a user interaction, call the **pump()** or **pumpAndSettle()** methods provided by the **WidgetTester**.
+
+First we have to find the correct **TextField**
+<details>
+
+<summary>expand the bmi_test.dart</summary> 
+
+in `bmi_test.dart`
+
+```dart
+    //Find the Height field
+      final heightField = find.ancestor(
+        of: find.text('height in cm'),
+        matching: find.byType(TextField),
+      );
+      
+      //Enter a value
+      await tester.enterText(heightField, "175");
+      expect(find.text('175'), findsOneWidget);
+```
+
+</details>
+
+Now enter a value of 90 into the weight field.
+
+Since we have an **OutlinedButton** find it using **byType()** and give it a **tap()**.
+
+Done forget to rebuild the **Widget** tree by calling the **pump()** method.
+
+<details>
+
+<summary>expand the bmi_test.dart</summary>
+
+in `bmi_test.dart`
+
+```dart
+    //tap the button
+    await tester.tap(find.byType(OutlinedButton));
+    //Rebuild the Widget
+    await tester.pump();
+    //Check the result
+    expect(find.text('29.39'), findsOneWidget);
+
+```
+</details>
