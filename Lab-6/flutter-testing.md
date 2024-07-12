@@ -301,7 +301,7 @@ void main() {
 
       expect(titleFinder, findsOneWidget);
     });
-  }
+  });
 }
 
 ```
