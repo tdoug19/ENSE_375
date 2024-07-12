@@ -387,7 +387,7 @@ in `bmi_test.dart`
 </details>
 
 ## Assignment
-Just like in last lab, your requirements have changed and you must implement the Phase 1 and Phase 2 modifictions.  Now test your new Widgets with automated tests in your `bmi_test.dart`  file as per the previous lab requitements.
+Just like in last lab, your requirements have changed and you must implement the Phase 1 and Phase 2 modifications.  Now test your new Widgets with automated tests in your `bmi_test.dart`  file as per the previous lab requitements.
 
 ## Submission
 
