@@ -153,9 +153,9 @@ Ok, we have to get our application to the point of last lab.  Copy the following
 
 <details>
 
-<summary>expand bmi_test.dart</summary>
+<summary>expand bmi.dart</summary>
 
-in `bmi_test.dart`
+in `bmi.dart`
 
 ```dart 
 import 'package:flutter/material.dart';
